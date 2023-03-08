@@ -1,0 +1,75 @@
+#!/bin/sh
+
+#     
+#     
+
+pyphoon -n 4 | tr -d '\n@' | tr -d [:blank:] > ~/.pymoon &&
+
+##FULL
+if
+	grep -q 'FullMoon+[0]\|fullMoon-[0]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+
+##Crescents
+    elif
+        grep -q 'NewMoon+[12]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+
+    elif
+        grep -q 'NewMoon+[0]\|NewMoon-[0]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+
+    elif
+        grep -q 'LastQuarter+[5678]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+
+    elif
+        grep -q 'NewMoon+[345]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+
+    elif
+	grep -q 'NewMoon+[678]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+
+    elif
+	grep -q 'FirstQuarter+[01]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+
+    elif
+	grep -q 'FirstQuarter+[23]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+
+    elif
+	grep -q 'FirstQuarter+[345678]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+
+#WANING
+    elif
+	grep -q 'FullMoon+[123]' ~/.pymoon
+    then echo '' > ~/.phase.tmp #good
+
+    elif
+	grep -q 'FullMoon+[456]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+
+    elif
+        grep -q 'FullMoon+[78]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+
+    elif
+        grep -q 'LastQuarter+[01]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+
+    elif
+        grep -q 'LastQuarter+[234]' ~/.pymoon
+    then echo '' > ~/.phase.tmp
+#    elif
+#        grep -q 'LastQuarter+[45678]' ~/.pymoon
+#    then echo '' > ~/.phase.tmp
+
+#           ERROR
+    else echo 'E' > ~/.phase.tmp ;
+
+fi #&&
+
+bat -p ~/.phase.tmp
